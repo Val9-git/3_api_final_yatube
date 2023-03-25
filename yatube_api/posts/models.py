@@ -49,7 +49,7 @@ class Follow(models.Model):
         verbose_name='Автор комментария',
         related_name='follower',
     )
-    author = models.ForeignKey(
+    following = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         verbose_name='Автор комментария',
@@ -59,7 +59,7 @@ class Follow(models.Model):
     class Meta:
         constraints = [
             models.CheckConstraint(
-                check=~models.Q(user=models.F("author")),
+                check=~models.Q(user=models.F("following")),
                 name='check_not_self_follow'
             ),
         ]
